@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { NavLink, useNavigate } from "react-router-dom";
-import { emailAndPassword } from '../firebase';
+import { regEmailAndPassword } from '../firebase';
 
 export default function Register ()
 {
@@ -11,12 +11,14 @@ export default function Register ()
         password: '',
     } );
 
+    console.log(state)
     const handleSubmit = async( event ) =>
     {
         event.preventDefault();
         try
         {
-            const user = await emailAndPassword( state.email, state.password );
+            const user = await regEmailAndPassword( state.email, state.password );
+            console.log(user);
             navigate('/login')
         }
         catch ( err )
