@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { NavLink, useNavigate } from "react-router-dom";
-import { regEmailAndPassword } from '../firebase';
+import { regEmailAndPassword, googleSign } from '../firebase';
 
 export default function Register ()
 {

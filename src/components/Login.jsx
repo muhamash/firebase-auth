@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, useNavigate } from "react-router-dom";
-import { logEmailAndPassword } from '../firebase';
+import { googleSign, logEmailAndPassword } from '../firebase';
 
 const Login = () =>
 {
@@ -25,6 +25,13 @@ const Login = () =>
             console.log(err)
         }
 
+    }
+
+    const handleSocialLogin = async() =>
+    {
+        await googleSign();
+        navigate('/home')
+        
     }
 
     return (
@@ -71,7 +78,7 @@ const Login = () =>
                 <div>
                     <button className="bg-black text-white p-1 rounded-md mx-2" onClick={handleLogin}>Login</button>
 
-                    {/* <button className="bg-blue-500 text-white p-1 rounded-md" onClick={handleSocialLogin}>Login With Google</button> */}
+                    <button className="bg-blue-500 text-white p-1 rounded-md" onClick={handleSocialLogin}>Login With Google</button>
                 </div>
             </form>
             <p className="my-2">

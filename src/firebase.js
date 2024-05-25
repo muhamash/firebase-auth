@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -22,7 +22,8 @@ console.log( app )
 
 // auth instance
 const auth = getAuth( app );
-console.log( auth )
+const googleSignIn = new GoogleAuthProvider();
+console.log( auth, googleSignIn )
 
 const regEmailAndPassword = async (email, password ) =>
 {
@@ -53,5 +54,32 @@ const logEmailAndPassword = async ( email, password ) =>
     }
 }
 
+const resetPassword = async(email) =>
+{
+    try
+    {
+        await sendPasswordResetEmail( auth, email );
+    }
+    catch(error)
+    {
+        throw error
+    }
+}
 
-export { regEmailAndPassword, logEmailAndPassword };
+const googleSign = async () =>
+{
+    // await GoogleAuthProvider()
+    try
+    {
+        const res = await signInWithPopup( auth, googleSignIn)
+        console.log( res )
+        return res.user
+    }
+    catch ( error )
+    {
+        throw error;
+    }
+}
+
+export { auth, logEmailAndPassword, regEmailAndPassword, resetPassword, googleSign };
+
